@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Resque", "src\Resque.csproj", "{B0A1FBBB-204B-4946-A3CC-048614881620}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{327C9F7A-A4AE-435C-9F01-561925F9B6C0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B0A1FBBB-204B-4946-A3CC-048614881620}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0A1FBBB-204B-4946-A3CC-048614881620}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0A1FBBB-204B-4946-A3CC-048614881620}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0A1FBBB-204B-4946-A3CC-048614881620}.Release|Any CPU.Build.0 = Release|Any CPU
+		{327C9F7A-A4AE-435C-9F01-561925F9B6C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{327C9F7A-A4AE-435C-9F01-561925F9B6C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{327C9F7A-A4AE-435C-9F01-561925F9B6C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{327C9F7A-A4AE-435C-9F01-561925F9B6C0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
