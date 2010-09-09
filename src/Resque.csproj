@@ -58,12 +58,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="APNJob.cs" />
+    <Compile Include="ExceptionThrowingJob.cs" />
     <Compile Include="IResqueJob.cs" />
     <Compile Include="ResqueClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ResqueObject.cs" />
     <Compile Include="EmailJob.cs" />
-    <Compile Include="Worker.cs" />
+    <Compile Include="Util.cs" />
+    <Compile Include="Worker.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

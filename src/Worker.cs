@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using ServiceStack.Logging;
+using ServiceStack.Logging.Support.Logging;
+using ServiceStack.Text;
 
 namespace Resque
 {
@@ -16,6 +19,7 @@ namespace Resque
 
 		private string[] _queues;
 		public string[] Queues { get { return _queues; } }
+
 
 		private Worker(string[] queues)
 		{
@@ -43,15 +47,29 @@ namespace Resque
 
 		public void Work(int interval)
 		{
+			Util.Log.InfoFormat("Starting Worker with {0} interval", interval);
 			do
 			{
+
 				ResqueObject item = Reserve();
 				if (item != null)
 				{
 					//log got job dump item
-
+					Util.Log.InfoFormat("Found job {0}", item.Dump());
 					WorkingOn(item);
-					item.PerformJob();
+
+					try
+					{
+						item.PerformJob();
+					}
+					catch (Exception e)
+					{
+						ResqueClient q = ResqueClient.GetResque();
+						item.exception = e;
+						q.PushToFailures(item);
+						q = null;
+					}
+					
 					DoneWorking();
 				}
 				else 
@@ -65,6 +83,8 @@ namespace Resque
 				
 			} while (true);
 		}
+
+
 
 		/// <summary>
 		/// Get's the next ResqueObject to process.
@@ -88,6 +108,7 @@ namespace Resque
 
 			return null;
 		}
+
 
 		private void WorkingOn(ResqueObject item)
 		{ 

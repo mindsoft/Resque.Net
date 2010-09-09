@@ -64,9 +64,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestResque.cs" />
     <Compile Include="TestResqueObject.cs" />
+    <Compile Include="TestUAPushMessage.cs" />
     <Compile Include="TestWorker.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\UAGateway\UAGateway.csproj">
+      <Project>{0F4E461E-EBFB-4892-8D12-59AF83E84F0C}</Project>
+      <Name>UAGateway</Name>
+    </ProjectReference>
     <ProjectReference Include="..\src\Resque.csproj">
       <Project>{B0A1FBBB-204B-4946-A3CC-048614881620}</Project>
       <Name>Resque</Name>

@@ -31,6 +31,25 @@ namespace Resque
 
 
 		/// <summary>
+		/// This allow you to override the queue field in the Resque Object
+		/// Useful when a job fails and we need to put it in the error queue
+		/// </summary>
+		/// <param name="queueName"></param>
+		/// <param name="item"></param>
+		public void Push(string queueName, ResqueObject item)
+		{
+			using (RedisClient redisClient = Redis())
+			{
+				//Create a 'strongly-typed' API that makes all Redis Value operations to apply against Shippers
+				WatchQueue(queueName);
+				var jsv = TypeSerializer.SerializeToString(item);
+				redisClient.PushItemToList(queueName, jsv);
+
+			}
+
+		}
+
+		/// <summary>
 		/// Pushes a job onto a queue. Queue name should be a string and the
 		/// item should be any JSON-able POCO.
 		/// </summary>
@@ -38,16 +57,14 @@ namespace Resque
 		/// <param name="?"></param>
 		public void Push(ResqueObject item)
 		{
-			using (RedisClient redisClient = Redis())
-			{
-				//Create a 'strongly-typed' API that makes all Redis Value operations to apply against Shippers
-				WatchQueue(item.Queue);
-				var jsv = TypeSerializer.SerializeToString(item);
-				redisClient.PushItemToList(item.Queue, jsv);
-				
-			}
-		
+			Push(item.Queue, item);
 		}
+
+		public void PushToFailures(ResqueObject item)
+		{
+			Push("queue:failures", item);
+		}
+
 		public ResqueObject Pop(string queueName)
 		{
 			using (RedisClient redisClient = Redis())

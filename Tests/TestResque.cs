@@ -9,6 +9,8 @@ using ServiceStack.Redis;
 using ServiceStack.Redis.Generic;
 using ServiceStack.Text;
 
+
+
 namespace Tests
 {
 	[TestFixture]
@@ -34,9 +36,28 @@ namespace Tests
 
 			q.Push(apn);
 
+			////Create an Apple Push Notification
+			//ResqueObject uaJob = new ResqueObject { Queue = "queue:apn" };
+			//uaJob.Job = new UAPushJob { PleaseNo = "Does this work now?" };
+			//uaJob.JobType = uaJob.Job.GetType();
+
+			//q.Push(uaJob);
 
 
 
+		}
+
+		[Test]
+		public void TestExceptionJob()
+		{
+			ResqueClient q = ResqueClient.GetResque();
+
+			//Create an Email Job
+			ResqueObject exp = new ResqueObject { Queue = "queue:email" };
+			exp.Job = new ExceptionThrowingJob { Desc = "Go boom boom" };
+			exp.JobType = exp.Job.GetType();
+			q.Push(exp);
+		
 		}
 
 		[Test]
